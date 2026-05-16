@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warning</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background: #111;
+      border: 2px solid red;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0px 0px 25px red;
+    }
+
+    h1 {
+      color: red;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: red;
+      color: white;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: darkred;
+      transform: scale(1.05);
+    }
+
+    .loading {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #333;
+      border-top: 6px solid red;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-top: 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Video fullscreen mode */
+    .videoScreen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .topText {
+      position: absolute;
+      top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0px 0px 15px red;
+      z-index: 99999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Warning Screen -->
+  <div class="container" id="warningBox">
+    <h1>⚠ WARNING</h1>
+    <p>
+      This site contains content that may be disturbing to some users.<br><br>
+      Viewer discretion is advised.
+    </p>
+
+    <button onclick="startLoading()">Continue</button>
+  </div>
+
+  <!-- Loading Screen -->
+  <div class="container loading" id="loadingBox">
+    <h1>Loading...</h1>
+    <p>Please wait while we verify your access.</p>
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Rickroll Video Screen -->
+  <div class="videoScreen" id="videoBox">
+    <div class="topText">😈 You got Rickrolled</div>
+    <iframe 
+      id="rickVid"
+      src=""
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script>
+    function startLoading() {
+      document.getElementById("warningBox").style.display = "none";
+      document.getElementById("loadingBox").style.display = "flex";
+
+      setTimeout(() => {
+        document.getElementById("loadingBox").style.display = "none";
+        document.getElementById("videoBox").style.display = "flex";
+
+        document.getElementById("rickVid").src =
+          "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&rel=0&showinfo=0";
+      }, 2500);
+    }
+  </script>
+
+</body>
+</html>
